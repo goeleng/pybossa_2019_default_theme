@@ -1,0 +1,25 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = project.short_name %}
+{% set active_link = 'tasks' %}
+{% set section = _('Import tasks') %}
+
+{% block projectcontent %}
+{% from "_formhelpers.html" import render_field, render_form %}
+<section class="account update avatar">
+                <h2>{{_('Update your avatar')}}</h2>
+                <div>
+                    <img id="uploadPreview" style="max-width: 100%">
+                </div>
+                <form method="post" action="{{ url_for('project.tasks', short_name=project.short_name) }}import/upload" enctype="multipart/form-data">
+                    <fieldset>
+                        <div class="col-md-2 img-thumbnail">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        </div>
+                        <input type="text" name="question">
+                        <input type="file" name="file" multiple>
+                        <input type="submit" value="Upload File">
+                    </fieldset>
+                </form>
+            </section>
+{% endblock %}

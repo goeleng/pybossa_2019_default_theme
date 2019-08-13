@@ -1,0 +1,2 @@
+{% from "projects/_helpers.html" import render_project_card_option %}
+{{ render_project_card_option(project, upload_method, title=_('Local'), explanation=_('Import from a Local manifest'), link=url_for(target, short_name=project.short_name, type='localUploader'), link_action_text=_('Import data'), icon='code')}}
