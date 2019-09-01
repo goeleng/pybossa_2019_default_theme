@@ -14,9 +14,10 @@
             <h1>{{_('Welcome to ')}} {{brand}}</h1>
             <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
             {% endif %}
+            {{ home_content }}
         </div>
     </div>
-</section>
+</section><!--TODO extract page into db and add editor like presenter -->
 {% if historical_contributions %}
 {{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, section_class='home projects', title_size='2') }}
 {% endif %}

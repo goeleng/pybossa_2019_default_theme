@@ -7,18 +7,20 @@
 {% block projectcontent %}
 {% from "_formhelpers.html" import render_field, render_form %}
 <section class="account update avatar">
-                <h2>{{_('Update your avatar')}}</h2>
+                <h2>{{_('Projektbilder hochladen')}}</h2>
                 <div>
                     <img id="uploadPreview" style="max-width: 100%">
                 </div>
                 <form method="post" action="{{ url_for('project.tasks', short_name=project.short_name) }}import/upload" enctype="multipart/form-data">
                     <fieldset>
-                        <div class="col-md-2 img-thumbnail">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                        </div>
-                        <input type="text" name="question">
-                        <input type="file" name="file" multiple>
-                        <input type="submit" value="Upload File">
+
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <label for="question">Bitte Frage für die Bilder angeben:</label>
+                        <input type="text" name="question" required>
+                        <br>
+                        <input type="file" name="file" multiple required>
+                        <br>
+                        <input type="submit" value="Dateien und Frage hochladen">
                     </fieldset>
                 </form>
             </section>

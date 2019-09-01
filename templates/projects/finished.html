@@ -3,27 +3,25 @@
 {% set active_link = "finished"  %}
 {% set section = _('Finished')  %}
 {% set active_project = project.short_name %}
+{% from "projects/_helpers.html" import render_task_card_thumbnail %}
 
 {% block projectcontent %}
-<script>
-    Modernizr.load({
-            test: window.JSON,
-            nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
-            });
-</script>
 <script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
+<div class="container">
 {% if n_results and n_results > 0 %}
-    <ul>
-    {% for result in n_results %}
-        <li>TaskID: {{ result.task_id }}; Answer: {{ result.info }}; Link: <a href="task/{{ result.task_id }}">LINK</a> </li>
-    {% endfor %}
-    </ul>
+
+{% for result in n_results %}
+    <div class="col-md-6">
+    {{ render_task_card_thumbnail(True, result.media_url, result.task_id)}}
+     </div>
+{% endfor %}
 
 {% else %}
+
 <p id="noresult">{{_('User has not worked on any tasks for this project.')}}</p>
 
 {% endif %}
-
+</div>
 <div id='PYBOSSA_USER_LOCALE' hidden>
     {% if current_user.is_anonymous() %}
     en
