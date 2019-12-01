@@ -5,13 +5,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-4 col-md-4" style="margin-top:10px;">
-                <h1>{{_('Sign in')}}</h1>
+                <h1>{{_('Anmelden')}}</h1>
                 {% from "_formhelpers.html" import render_field, render_form %}
-                {{ render_form(form, form_id="signin", action_text=_('Sign in'), btn_class="btn btn-primary btn-block")}}
+                {{ render_form(form, form_id="signin", action_text=_('Anmelden'), btn_class="btn btn-info btn-block")}}
                 <p class="text-sm text-center" style="margin-top: 5px;">
-                <a href="{{ url_for('account.forgot_password') }}">{{ _('Forgot Password') }}</a>
+                <p class="text-center"><a href="{{ url_for('account.forgot_password') }}">{{ _('Passwort vergessen?') }}</a></p>
                 </p>
-                <p class="text-center">{{_('Not registered?')}} <a href="{{ url_for('account.register') }}">{{_('Sign up for free now')}}</a></p>
+                <p class="text-center">{{_('Noch nicht registriert?')}} <a class="btn btn-default btn-block" href="{{ url_for('account.register') }}">{{_('Kostenlos registrieren')}}</a></p>
 
                 <div id="ssnn" style="display: none;">
                     {% if next is not none %}
@@ -36,16 +36,10 @@
                     {% endif %}
                     {% endif %}
                 </div>
-                <p>
-
-                <span class="label label-warning"><i class="fa fa-bullhorn"></i> {{ _('Note') }}</span>
-                {{ _('By click the') }} <strong>{{ _('Sign in button') }}</strong> {{ _('below you are agreeing to
-                the') }} <a href={{url_for('help.tos')}}>{{ _('terms of use') }}</a> {{ _('and') }}
-                <a href={{data_use | safe}}>{{ _('data') }}</a>.
-
-                </p>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 <script>
     if (localStorage.getItem('ageCheck')) {
         document.getElementById('ssnn').style.display = 'block';

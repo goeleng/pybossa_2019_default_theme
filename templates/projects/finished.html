@@ -1,7 +1,7 @@
 {% extends "/projects/base.html" %}
 {% set active_page = "projects"  %}
 {% set active_link = "finished"  %}
-{% set section = _('Finished')  %}
+{% set section = _('Meine Bearbeitungen')  %}
 {% set active_project = project.short_name %}
 {% from "projects/_helpers.html" import render_task_card_thumbnail %}
 
@@ -9,24 +9,43 @@
 <script src="{{url_for('static', filename="js/pybossa/pybossa.js")}}" type="text/javascript"></script>
 <div class="container">
 {% if n_results and n_results > 0 %}
+<div class="row">
+<div class="col-md-9">
+    <p><strong>Hinweis:</strong> Hier werden Bilder aus dem Projekt angezeigt, die Sie angeschaut haben. Bilder bei denen Sie Angaben gemacht haben, werden mit einem grünen Haken gekennzeichnet.</p>
+</div>
+</div>
+{% for number in range(0,n_results|count,3) %}
+    <div class="row">
+        <div class="col-md-3">
+            {% if n_results[number].processed %}
+                <img width="50" height="50" style="position: absolute; top: 10px; right: 20px; margin-left: 0" src="../../static/img/success.png">
+            {% endif %}
+            {{ render_task_card_thumbnail(True, n_results[number].media_url, n_results[number].taskrun.task_id)}}
+        </div>
+    {% if number + 1  < n_results|count %}
+        <div class="col-md-3">
+            {% if n_results[number + 1].processed %}
+                <img width="50" height="50" style="position: absolute; top: 10px; right: 20px; margin-left: 0" src="../../static/img/success.png">
+            {% endif %}
+            {{ render_task_card_thumbnail(True, n_results[number + 1].media_url, n_results[number + 1].taskrun.task_id)}}
+        </div>
+    {% endif %}
+    {% if number + 2  < n_results|count %}
+        <div class="col-md-3">
+            {% if n_results[number + 2].processed %}
+                <img width="50" height="50" style="position: absolute; top: 10px; right: 20px; margin-left: 0" src="../../static/img/success.png">
+            {% endif %}
+            {{ render_task_card_thumbnail(True, n_results[number + 2].media_url, n_results[number + 2].taskrun.task_id)}}
+        </div>
+    {% endif %}
+    </div>
 
-{% for result in n_results %}
-    <div class="col-md-6">
-    {{ render_task_card_thumbnail(True, result.media_url, result.task_id)}}
-     </div>
 {% endfor %}
 
 {% else %}
 
-<p id="noresult">{{_('User has not worked on any tasks for this project.')}}</p>
+<p id="noresult">{{_('Sie haben noch keine Aufgabe aus diesem Projekt bearbeitet.')}}</p>
 
 {% endif %}
-</div>
-<div id='PYBOSSA_USER_LOCALE' hidden>
-    {% if current_user.is_anonymous() %}
-    en
-    {% else %}
-    {{ current_user.locale }}
-    {% endif %}
 </div>
 {% endblock %}

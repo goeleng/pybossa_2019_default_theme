@@ -11,17 +11,51 @@
             <p>{{ featured_project.description }}</p>
             <a class="btn btn-primary" href="{{ url_for('project.details', short_name=featured_project.short_name)}}">{{_('Contribute')}}</a>
             {% else %}
-            <h1>{{_('Welcome to ')}} {{brand}}</h1>
-            <p>{{_("The ultimate crowdsourcing framework to analyze or enrich data that can't be processed by machines alone.")}}</p>
+            <h1>Fotos ohne Story?</h1>
+                <h3 style="color: #144352">Tragen Sie zur wissenschaftlichen Erschließung</h3>
+                <h3 style="color: #144352">der historischen Fotografien</h3>
+                <h3 style="color: #144352">aus der Bildstelle des Forschungszentrums Karlsruhe bei!</h3>
+                <hr>
+            <img width="50%" alt="Baustellenschild für Reaktor-Station wird errichtet" src="../../static/img/home/ohnestory.jpg" style="float:left; margin-right: 20px">
+            <p style="text-align: justify">Das 2009 mit der Universität Karlsruhe zum KIT fusionierte Forschungszentrum Karlsruhe<sup>
+	            <a id="anker1" title="Zur Erläuterung" href="#fn1">[1]</a>
+                </sup> war eine
+                führende deutsche Großforschungseinrichtung. Seit der Gründung im Jahr 1956 wurde hier die wissenschaftliche und technologische Basis für die
+                friedliche Nutzung der Kernenergie geschaffen. Nach der Abkehr von der Kerntechnik in Deutschland und der damit einhergehenden Neuausrichtung des Zentrums ist
+                dieser Teil der KIT-Geschichte Vielen unbekannt. Allerdings besitzen ehemalige und ältere Mitarbeiter des Zentrums ein noch sehr detailreiches Wissen über diese Zeit.
+                <br>Dem Team des KIT-Archivs wird das gerade sehr deutlich bei der Erschließung des historisch wertvollen Bildbestands, der in den Jahren von 1956 bis 2006 durch die Fotostelle des
+                Zentrums erstellt wurde.</p>
+                <p style="text-align: justify">Bei der Frage, wer oder was BEATE, MILLI, CORA und die WAK waren, konnte das KIT-Archiv die Abkürzungen dieser prominenten Zentrumsprojekte und –anlagen nicht nur auflösen, sondern sie auch in die Bearbeitung einfließen lassen.</p>
+                <p style="text-align: justify">Doch es gibt ein Wissen jenseits der Abkürzungslisten, Akten und Publikationen, das mit den Beteiligten verloren geht. Hinter vielen Bildern verbirgt sich eine eigene Geschichte, andere Fotos zeigen Entwicklungsschritte von Projekten,
+                die der Nachwelt in ihrer Bedeutung bald nicht mehr bewusst sein werden. Auch die abgebildeten Menschen können nur schwer identifiziert werden.
+            </p>
+            <p style="text-align: justify">
+            Die von der Fotostelle des Zentrums erstellten Notizen zum Bildinhalt machten eine Nutzung in den ersten Jahrzehnten nach der Anfertigung der Fotografien möglich.
+                Aber im Laufe der Zeit werden die knappen Hinweise immer weniger deutbar.
+            </p>
+            <p>
+                <strong>An dieser Stelle setzt das Crowdsourcing-Projekt des KIT-Archivs an.</strong>
+            </p>
+            <p style="text-align: justify">
+                Diese Plattform zeigt digitalisierte Aufnahmen aus der Fotostelle des Zentrums und bietet langjährigen und ehemaligen Mitarbeitern des heutigen Campus Nord die Möglichkeit, diese zu kommentieren.
+                Mit Ihren Hinweisen zum Inhalt der Bilder helfen Sie, das Wissen über die Geschichte des Zentrums zu erhalten und für die Nachwelt sowie insbesondere für die historische Forschung nutzbar zu machen.
+                Informationen aus den hier eingegebenen Kommentaren werden vom KIT-Archiv fachgerecht in ein datenbankbasiertes Informationssystem übertragen. Teilnehmer brauchen sich daher bei ihren Formulierungen an keinem Regelwerk zu orientieren.
+            </p>
+            <p style="text-align: justify">
+                Aber auch Flaneure sind in der historischen Bilderwelt des Zentrums willkommen. Stöbern Sie, frischen Sie Ihre Erinnerungen auf und erzählen Sie den jetzigen oder damaligen Kollegen von unserem Projekt.
+                Eine Teilnahme ist jederzeit ortsunabhängig nach Anmeldung über einen Webbrowser möglich. Ihre Beiträge werden anonymisiert gespeichert und können nur von den Mitarbeitern des KIT-Archivs eingesehen werden.
+                Über Ihr Benutzerkonto haben Sie dauerhaft Zugriff auf die Daten und können Eingaben auch nachträglich ergänzen oder korrigieren.
+            </p>
+            <p style="text-align: justify">Wünschen Sie eine persönliche Einführung? Kontaktieren Sie uns montags bis donnerstags während der üblichen Bürozeiten unter der Telefonnummer 0721 6084 5443.
+            </p>
+            <br>
+            <hr>
+            <ol>
+                <li id="fn1" style="color:#546e7b; list-style: none; text-align: justify"><a href="#anker1">[1]</a>Im Laufe seiner Geschichte änderte das Forschungszentrum Karlsruhe mehrfach seinen Namen. Der Bestand trägt den letzten Namen dieser Großforschungseinrichtung vor der Fusion mit der Universität Karlsruhe zum KIT. Der Einfachheit halber wird auf den Seiten des Crowdsourcing-Projekts auf eine genaue Differenzierung verzichtet und auf die verallgemeinerte Bezeichnung „Zentrum“ ausgewichen.</li>
+            </ol>
             {% endif %}
             {{ home_content }}
         </div>
     </div>
 </section><!--TODO extract page into db and add editor like presenter -->
-{% if historical_contributions %}
-{{ helper.render_grid_projects(historical_contributions, 'Historical Contributions', upload_method, current_user, section_class='home projects', title_size='2') }}
-{% endif %}
-{% if featured %}
-{{ helper.render_grid_projects(featured, 'Featured Projects', upload_method, current_user, section_class='home projects', readmore_text='Contribute', title_size='2') }}
-{% endif %}
 {% endblock %}

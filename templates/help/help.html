@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% set active_page = "help" %}
+
+{% block content %}
+<section class="help license" style="margin-top: 50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <section id="overview">
+                    <h1><strong>Hilfe:</strong></h1>
+                    <h3 style="color: black"><strong>Übersicht der Themen:</strong></h3>
+                    <ul>
+                        <li><a href="#help_general">Allgemeine Hinweise</a></li>
+                        <li><a href="#help_register">Wie registriere ich mich?</a></li>
+                        <li><a href="#help_login">Wie melde ich mich an?</a></li>
+                        <li><a href="#help_projects">Wo finde ich Projekte?</a></li>
+                    </ul>
+                    <hr>
+                    <h3 style="color: black"><strong>Allgemeine Hinweise:</strong></h3>
+                    <p><ul>
+                        <li style="color: black">Bitte benutzen Sie Chrome, Firefox oder Safari. Der Internet Explorer wird nicht unterstützt.</li>
+                        <li style="color: black">Zum Blättern innerhalb der Fotostrecken, benutzen Sie bitte die Buttons „Vorherige Bearbeitung“ und
+                            „Nachfolgende Bearbeitung“. Die Verwendung des "Zurück"-Buttons des Browsers führt zu Fehlfunktionen.</li>
+                        <li style="color: black">Die Rechte an den auf dieser Plattform gezeigten Aufnahmen liegen beim KIT.
+                            Das Herunterladen sowie die weitere Verbreitung oder Publikation der Bilder ist nicht gestattet.</li>
+                    </ul></p>
+                    <hr>
+                    <h3 id="help_register" style="color: black"><strong>Wie registriere ich mich?</strong></h3>
+
+                    <p>1. Klicken Sie oben rechts auf "Einloggen" </p>
+                    <img width="100%" src="../../static/img/help/register_01_new.png">
+                    <p>2. Sie gelangen nun auf die Anmeldeseite. Dort können Sie sich registrieren, falls Sie noch kein Konto besitzen.</p>
+                    <img width="50%" src="../../static/img/help/register_02.png">
+                    <p>Folgen Sie den Anweisungen, um Ihr Konto zu erstellen. Nach Eingabe Ihrer Anmeldedaten erhalten Sie zur Verifizierung eine Mail.
+                        Nach Bestätigung über den dort angegebenen Link wird Ihr Benutzerkonto freigeschaltet.</p>
+                    <hr>
+                    <h3 id="help_login" style="color: black"><strong>Wie melde ich mich an?</strong></h3>
+                    <p>1. Klicken Sie dazu zuerst oben rechts auf "Einloggen"</p>
+                    <img width="100%" src="../../static/img/help/register_01_new.png">
+                    <p>2. Geben Sie Ihre Benutzerdaten an und klicken auf "Anmelden".</p>
+                    <img width="50%" src="../../static/img/help/register_03.png">
+                    <hr>
+                    <h3 id="help_projects" style="color: black"><strong>Wo finde ich Projekte zum Bearbeiten?</strong></h3>
+                    <p>1. Klicken Sie dazu auf <a href="{{ url_for('project.index') }}">"Fotostrecke"</a> in der Navigationsleiste.</p>
+                    <img width="100%" src="../../static/img/help/project_01_new.png">
+                    <p>2. Wählen Sie nun eine Kategorie aus.</p>
+                    <img width="50%">
+                    <p>3. Wenn Sie sich für ein Projekt interessieren, klicken Sie auf "Mehr Informationen".</p>
+                    <img width="100%" src="../../static/img/help/project_02.png">
+                    <p>4. Falls Sie einen Beitrag zu dem gewählten Projekt leisten wollen, klicken Sie auf "Bearbeitung starten".</p>
+                    <img width="100%" src="../../static/img/help/project_03.png">
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

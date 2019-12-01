@@ -3,6 +3,9 @@
         {% if field.type != 'HiddenField' and field.type != 'CSRFTokenField' and label_visible and field.name != 'id' and field.name != 'form_name' %}
             <label for="{{ field.id }}" class="control-label">{{ field.label }}</label>
         {% endif %}
+        {% if field.name == 'name' %}
+            <div><strong>Hinweis:</strong> der Benutzername ist von anderen Personen einsehbar!</div>
+        {% endif %}
         {{ field(class_='form-control', **kwargs) }}
         {% if field.errors %}
             {% for e in field.errors %}
@@ -12,11 +15,24 @@
     </div>
 {%- endmacro %}
 
-{% macro render_checkbox_field(field) -%}
+{% macro render_checkbox_field(field, link=None) -%}
     <div class="checkbox">
-        <label>
-            {{ field(type='checkbox', **kwargs) }} {{ field.label }}
-        </label>
+        {% if field.name == 'consent' %}
+            <div style="padding-left: 20px">
+                 {{ field(type='checkbox', **kwargs) }} Hiermit akzeptiere ich die <a href="{{url_for('help.tos')}}">Nutzungsbedingungen</a> des Crowdsorucing Projekts des KIT-Archiv.
+            </div>
+        {% elif field.name == 'contact_consent' %}
+            <div style="padding-left: 20px">
+                {{ field(type='checkbox', **kwargs) }} {{ field.label }}
+            </div>
+        {% else %}
+            <label>
+                {% if link != None %}<a href="{{ link }}">{{ field(type='checkbox', **kwargs) }} {{ field.label }}</a>
+                {% else %}
+                    {{ field(type='checkbox', **kwargs) }} {{ field.label }}
+                {% endif %}
+            </label>
+        {% endif %}
     </div>
 {%- endmacro %}
 

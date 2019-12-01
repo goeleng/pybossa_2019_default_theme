@@ -17,9 +17,9 @@
                     {{helper.render_user_thumbnail(user, upload_method, class='col-xs-4 img-circle')}}
                 </div>
                 <div class="text-center">
-                    <h1 id="user-data">{{user.fullname}}</h1>
+                    <h1 id="user-data">{{user.name}}</h1>
                     {% if user.rank %}
-                    <h2><i class="fa fa-trophy"></i> {{ _('Rank')}}: {{user.rank}}</h2>
+                    <h2><i class="fa fa-trophy"></i> {{ _('Rang')}}: {{user.rank}}</h2>
                     {% endif %}
                 </div>
             </div>
@@ -36,10 +36,10 @@
     </div>
 </section>
 {% if projects_created %}
-{{render_grid_projects(projects_created, "Created Projects", upload_method, id="created-projects")}}
+{{render_grid_projects(projects_created, "Erstellte Projekte", upload_method, id="created-projects")}}
 {% endif %}
 {% if projects %}
-{{render_grid_projects(projects, "Contributions", upload_method, id="contributed-projects")}}
+{{render_grid_projects(projects, "Beteiligungen", upload_method, id="contributed-projects")}}
 {% endif %}
 {% endif %}
 {{ broken_image() }}

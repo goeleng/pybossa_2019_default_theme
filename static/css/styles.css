@@ -98,8 +98,20 @@ a[rel="popover"] {
 .label-info {
   background-color: #4190c2;
 }
+.label-hint {
+  background-color: #7a7a7a;
+}
 .label-success {
   background-color: #8bbf36;
+}
+.green-tick {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 input:focus,
 textarea:focus,

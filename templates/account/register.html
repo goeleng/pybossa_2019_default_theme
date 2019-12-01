@@ -6,38 +6,43 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <h1>{{ _('Create an account') }}</h1>
+                <h1>{{ _('Konto erstellen') }}</h1>
 
                 <div id="ageCheck" class="form-inline">
                     <div class="form-group">
-                        <p>{{_('To create an account you must be 16+ years old. Please enter your date of birth')}}</p>
+                        <p>{{_('Um sich zu registrieren, müssen Sie mindestens 16 Jahre alt sein.')}}</p>
                         <input class="form-control" id="day" placeholder="DD">
                         <input class="form-control" id="month" placeholder="MM">
                         <input class="form-control" id="year" placeholder="YYYY">
                     </div>
-                    <button onclick="checkAge()" style="margin-top:15px;" class="btn btn-primary">Check age</button>
+                    <button onclick="checkAge()" style="margin-top:15px;" class="btn btn-primary">Alter überprüfen</button>
                 </div>
-
-                {{ render_form(form, form_id="register", action_url=url_for('account.register'), btn_class="btn btn-primary btn-block" )}}
+                {{ render_form(form, form_id="register", action_url=url_for('account.register'), btn_class="btn btn-primary btn-block", action_text="Konto erstellen")}}
+                <form id="register" method="POST" action="{{ url_for('account.register')}}" role="form" class="{{ class_ }}">
+                    {{ form.hidden_tag() if form.hidden_tag }}
+                    {% if caller %}
+                        {{ caller() }}
+                    {% else %}
+                        {% for f in form %}
+                            {% if f.type == 'BooleanField' %}
+                            {% elif f.type == 'RadioField' %}
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <button type="submit" name="{{btn_name}}" value="{{btn_value}}" class="btn btn-primary btn-block">Konto erstellen</button>
+                </form>
                 {% if form.errors %}
                     <ul class="errors">
                     {% for field_name, field_errors in form.errors|dictsort if field_errors %}
                         {% for error in field_errors %}
                             {%  if field_name == 'consent' %}
-                                <li style="color: red"><strong>Sie müssen den Nutzungsbedingungen zustimmen!</strong></li>
+                                <li style="color: red"><strong>Sie müssen den <a href="{{url_for('help.tos')}}">Nutzungsbedingungen zustimmen!</a></strong></li>
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
                     </ul>
                 {% endif %}
-                <p class="text-center text-sm" style="margin-top:5px;">
-                <span class="label label-warning"><i class="fa fa-bullhorn"></i> {{ _('Note') }}</span> 
-                {{ _('By click the') }} 
-                <strong>{{ _('Create account button') }}
-                </strong>{{ _('below you are agreeing to the') }}
-                <a target="blank" href={{terms_of_use | safe}}>{{ _('terms of use') }} </a>{{ _('and') }} 
-                <a href={{data_use | safe}}>{{ _('data') }}</a>.
-                </p>
             </div>
         </div>
     </div>
@@ -69,7 +74,7 @@ var modal = new tingle.modal({
 });
 
 // set content
-modal.setContent("<h1>You must be 16+ years old to create an account</h1><p>You cannot create an account in this server unless you are 16+ years old. However, you can still participate as an anonymous user as you don't need an account for doing so.</p>");
+modal.setContent("<h1>Sie müssen älter als 16 Jahre sein, damit Sie ein Konto anlegen können</h1><p>Sie benötigen ein Konto, um an dem Projekt teilnehmen zu können. Dafür müssen Sie älter als 16 Jahre alt sein.</p>");
 
 // add a button
 modal.addFooterBtn('OK', 'tingle-btn tingle-btn--primary', function() {

@@ -15,10 +15,18 @@
                     <fieldset>
 
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                        <label for="question">Bitte Frage für die Bilder angeben:</label>
-                        <input type="text" name="question" required>
+                        <label for="question">Bitte Frage für die Bilder angeben:
+                            <input type="text" name="question" required>
+                        </label>
                         <br>
-                        <input type="file" name="file" multiple required>
+                        <label for="file">Bilder-Dateien
+                            <input type="file" name="file" multiple required>
+                        </label>
+                        <br>
+                        <label for="csv">CSV-Datei
+                            <input type="file" name="csv" required>
+                        </label>
+                        <p>CSV-Datei darf keine Umlaute enthalten und muss in UTF-8 encodiert sein. ( Trennzeichen muss ; sein )</p>
                         <br>
                         <input type="submit" value="Dateien und Frage hochladen">
                     </fieldset>

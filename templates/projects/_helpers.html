@@ -38,25 +38,30 @@
     {{ render_project_thumbnail(project, upload_method, class="img-responsive thumbnail card") }}
 </ul>
 <ul class="list-group" style="margin-top: 21px;">
-    <li class="list-group-item {% if active_link=="info"%}active{% endif %}"><a href="{{url_for('project.details', short_name=project.short_name)}}">{{_('Info')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
-    <li class="list-group-item {% if active_link=="results"%}active{% endif %}"><a href="{{url_for('project.results', short_name=project.short_name)}}">{{_('Results')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
-    <li class="list-group-item {% if active_link=="tasks"%}active{% endif %}"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{_('Tasks')}} {{daniel}}</a>{% if task_subsection_1_text %}<a href="{{task_subsection_1}}">{{task_subsection_1_text}}</a>{% endif %}<i class="fa fa-chevron-right pull-right"></i></li>
-    <li class="list-group-item {% if active_link=="finished"%}active{% endif %}"><a href="{{url_for('project.finished', short_name=project.short_name)}}">{{_('Finished')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
-    <li class="list-group-item {% if active_link=="stats"%}active{% endif %}"><a href="{{url_for('project.show_stats', short_name=project.short_name)}}">{{_('Statistics')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
-    {% if ( current_user.is_authenticated() and current_user.id in project.owners_ids) or current_user.admin %}
-    <li class="list-group-item {% if active_link=="settings"%}active{% endif %}"><a href="{{url_for('project.settings', short_name=project.short_name)}}">{{_('Settings')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    <li class="list-group-item {% if active_link=="info"%}active{% endif %}"><a href="{{url_for('project.details', short_name=project.short_name)}}">{{_('Info')}}</a></li>
+    {% if current_user.admin %}
+        <li class="list-group-item {% if active_link=="results"%}active{% endif %}"><a href="{{url_for('project.results', short_name=project.short_name)}}">{{_('Results')}}</a></li>
+        <li class="list-group-item {% if active_link=="tasks"%}active{% endif %}"><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{_('Tasks')}} {{daniel}}</a>{% if task_subsection_1_text %}<a href="{{task_subsection_1}}">{{task_subsection_1_text}}</a>{% endif %}</li>
     {% endif %}
-    {% if ( current_user.is_authenticated() and current_user.id in project.owners_ids
-    and current_user.pro) or current_user.admin %}
+    {% if current_user.is_authenticated() %}
+        <li class="list-group-item {% if active_link=="finished"%}active{% endif %}"><a href="{{url_for('project.finished', short_name=project.short_name)}}">Meine Bearbeitungen</a></li>
+    {% endif %}
+    {% if current_user.admin %}
+        <li class="list-group-item {% if active_link=="stats"%}active{% endif %}"><a href="{{url_for('project.show_stats', short_name=project.short_name)}}">{{_('Statistics')}}</a></li>
+        <li class="list-group-item {% if active_link=="settings"%}active{% endif %}"><a href="{{url_for('project.settings', short_name=project.short_name)}}">{{_('Settings')}}</a></li>
+    {% endif %}
+    {% if ( current_user.is_authenticated() and current_user.id in project.owners_ids and current_user.pro) or current_user.admin %}
         {% if pro_features.get('auditlog_enabled') %}
-        <li class="list-group-item {% if active_link=="auditlog"%}active{% endif %}"><a href="{{url_for('project.auditlog', short_name=project.short_name)}}">{{_('Audit Logs')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
+        <li class="list-group-item {% if active_link=="auditlog"%}active{% endif %}"><a href="{{url_for('project.auditlog', short_name=project.short_name)}}">{{_('Audit Logs')}}</a></li>
         {% endif %}
         {% if pro_features.get('webhooks_enabled') %}
-        <li class="list-group-item {% if active_link=="webhook"%}active{% endif %}"><a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}">{{_('Webhooks')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
+        <li class="list-group-item {% if active_link=="webhook"%}active{% endif %}"><a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}">{{_('Webhooks')}}</a></li>
         {% endif %}
     {% endif %}
-    <li class="list-group-item {% if active_link=="blog"%}active{% endif %}"><a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}">{{_('Blog')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
-    <li class="list-group-item {% if active_link=="contribute"%}active{% endif %}"><a href="{{url_for('project.presenter', short_name=project.short_name)}}">{{_('Contribute')}}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    {% if current_user.admin %}
+        <li class="list-group-item {% if active_link=="blog"%}active{% endif %}"><a href="{{url_for('project.show_blogposts', short_name=project.short_name)}}">{{_('Blog')}}</a></li>
+    {% endif %}
+    <li class="list-group-item {% if active_link=="contribute"%}active{% endif %}"><a href="{{url_for('project.presenter', short_name=project.short_name)}}">{{_('Contribute')}}</a></li>
 </ul>
 {% endmacro %}
 
@@ -201,13 +206,13 @@
 
 {% macro render_contribute_button(project, n_task_runs) %}
     {% if project['contrib_button'] == 'completed' %}
-    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Done! View results') }}</a>
+    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Erledigt!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'can_contribute' %}
-    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Start Contributing Now!') }}</a>
+    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-info btn-contribute center-block">{{ _('Bearbeitung starten!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'cannot_contribute' %}
-    <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Thanks for contributing') }}</a>
+    <a href="{{url_for('project.details', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Vielen Dank für Ihren Beitrag!') }}</a>
     {% endif %}
     {% if project['contrib_button'] == 'draft' %}
     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-primary btn-contribute pull-right">{{ _('Draft project, complete it!') }}</a>
@@ -257,7 +262,7 @@
                             </p>
                             {% endif %}
                            {% else %}
-                           <p class="readmore"><a href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'More info')}}</a></p>
+                           <p class="readmore"><a class="btn btn-info" href="{{ url_for('project.details', short_name=f.short_name)}}">{{_(readmore_text or 'Mehr Informationen')}}</a></p>
                            {% endif %}
                        </div>
                    </div>
@@ -340,7 +345,7 @@
         <h3>{{title}}</h3>
         {% endif %}
         {% if published == False %}
-        <span class="label label-info">DRAFT</span>
+        <span class="label label-warning">ENTWURF</span>
         {% endif %}
         <p>{{explanation}}</p>
         {% if link_two %}
@@ -394,13 +399,13 @@
             {% if is_creator %}
             <p class="readmore"><strong>Project Creator</strong></p>
             {% else %}
-            <p class="readmore"><a href="{{url_for('project.del_coowner', short_name=short_name, user_name=user.name)}}">
+            <p class="readmore"><a class="btn btn-success" href="{{url_for('project.del_coowner', short_name=short_name, user_name=user.name)}}">
                 {{ _('Remove Co-owner') }}</a>
             </p>
             {% endif %}
         {% else %}
         <p class="readmore">
-        <a href="{{url_for('project.add_coowner', short_name=short_name, user_name=user.name)}}">
+        <a class="btn btn-success" href="{{url_for('project.add_coowner', short_name=short_name, user_name=user.name)}}">
             {{ _('Add Co-owner') }}</a>
         </p>
         {% endif %}

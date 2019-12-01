@@ -3,14 +3,14 @@
     {{ render_user_thumbnail(current_user, upload_method, class="img-thumbnail") }}
 </ul>
 <ul class="list-group" style="margin-top: 21px;">
-    <li class="list-group-item {% if active_link=="profile"%}active{% endif %}"><a href="{{url_for('account.profile', name=current_user.name)}}">{{ _('My Account') }}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    <li class="list-group-item {% if active_link=="profile"%}active{% endif %}"><a href="{{url_for('account.profile', name=current_user.name)}}">{{ _('Mein Konto') }}</a></li>
     {% if current_user.admin %}
-    <li class="list-group-item {% if active_link=="projects"%}active{% endif %}"><a href="{{url_for('account.projects', name=current_user.name)}}">{{ _('My Projects') }}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    <li class="list-group-item {% if active_link=="projects"%}active{% endif %}"><a href="{{url_for('account.projects', name=current_user.name)}}">{{ _('Meine Projekte') }}</a></li>
     {% endif %}
     {% if current_user.admin %}
-    <li class="list-group-item {% if active_link=="admin"%}active{% endif %}"><a href="{{url_for('admin.index')}}">{{ _('Admin Site') }}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    <li class="list-group-item {% if active_link=="admin"%}active{% endif %}"><a href="{{url_for('admin.index')}}">{{ _('Admin Seite') }}</a></li>
     {% endif %}
-    <li class="list-group-item {% if active_link=="settings"%}active{% endif %}"><a href="{{url_for('account.update_profile', name=current_user.name)}}"> {{ _('My Settings') }}</a><i class="fa fa-chevron-right pull-right"></i></li>
+    <li class="list-group-item {% if active_link=="settings"%}active{% endif %}"><a href="{{url_for('account.update_profile', name=current_user.name)}}"> {{ _('Meine Einstellungen') }}</a></li>
 </ul>
 {% endmacro %}
 
@@ -50,7 +50,7 @@
 </p>
 {% endif %}
 {% if user.rank %}
-<p><strong><i class="fa fa-trophy"></i> {{ _('Rank')}}: </strong>
+<p><strong><i class="fa fa-trophy"></i> {{ _('Rang')}}: </strong>
     {% if private %}
         <a href="{{url_for('leaderboard.index')}}">
         {% endif %}
@@ -61,15 +61,11 @@
         {% endif %}
         {% if private %}</a>{% endif %}
     {% else %}
-    <p><strong><i class="fa fa-trophy"></i> {{ _('Rank') }}: </strong>{{ _('The user has not contributed to any tasks yet') }}</p>
+    <p><strong><i class="fa fa-trophy"></i> {{ _('Rank') }}: </strong>{{ _('Der Benutzer hat noch keine Aufgabe bearbeitet.') }}</p>
     {% endif %}
 
 {% if not private %}
 <p><strong><i class="fa fa-time"></i> {{ _('Joined') }}: </strong>{{ user.created[0:10]}}</p
-{% endif %}
-
-{% if settings %}
-<p><strong><i class="fa fa-key"></i> {{ _('API key') }}: </strong>{{ user.api_key }}</p>
 {% endif %}
 
 {% if private and not settings%}

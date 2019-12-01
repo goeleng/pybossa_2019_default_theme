@@ -1,19 +1,38 @@
-Hello {{ user.fullname }},
+Hallo {{ user.fullname }},
 
-We received a request to recover your password for {{ config.BRAND }}.
+wir haben eine Nachricht erhalten, dass Sie Ihr Passwort für das Crowdsourcing Projekt des KIT-Archivs vergessen haben. 
 
-If you did not request this, please ignore this email.
+Wenn Sie diese Nachricht nicht veranlasst haben, ignorieren Sie bitte diese E-Mail. 
 
-To recover your password, please visit the URL below:
+Um Ihr Passwort zurückzusetzen, folgen Sie bitte dem Link:  
 
-[Click here to recover your account][recover]
+[Klicken Sie hier, um Ihr Passwort zurückzusetzen][recover]
 
 [recover]: {{ recovery_url }}
 
-Regards,
+<br>
+Bei Fragen oder Problemen kontaktieren Sie uns bitte über unten stehende Telefonnummer.
+Mit freundlichen Grüßen
+<br>
+<br>
+Ihr KIT-Archiv
+<br>
+<br>
+Karlsruher Institut für Technologie (KIT)  <br>
+Allgemeine Services (AServ)
 
-{{ config.BRAND }} Team
+KIT-Archiv
 
-***
-Powered by: [PyBossa](http://pybossa.com)
-Follow us: [Twitter](http://twitter.com/pybossa), [Google+](https://plus.google.com/115359083217638640334/posts)
+<br>
+<sup>
+Kaiserstraße 12<br>
+76131 Karlsruhe<br>
+Telefon: +49 721 608-45443<br>
+Fax: +49 721 608-994009<br>
+E-Mail: info@archiv.kit.edu<br>
+Web: http://www.archiv.kit.edu<br>
+<br>
+Sitz der Körperschaft:<br>
+Kaiserstr. 12, 76131 Karlsruhe<br>
+<br>
+KIT – Die Forschungsuniversität in der Helmholtz-Gemeinschaft </sup>
